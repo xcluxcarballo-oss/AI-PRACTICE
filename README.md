@@ -12,7 +12,8 @@ These are placeholders in `index.html`:
 
 1. **Social links:** replace each `your-handle` with your real profile URL. The links are LinkedIn, X, Instagram and GitHub. Delete any you don't use.
 2. **Email:** replace `you@example.com` in the `mailto:` link.
-3. **Photo:** save your photo as `assets/avatar.jpg` (a square crop, at least 256×256). Then swap the `DC` placeholder `<div>` for the `<img>` tag shown in the comment just above it.
+3. **Projects:** replace the two "Project name" cards with your real projects. Each card has a title, a short description and a link. Copy an `<li>` block to add more, or remove the link if a project has none.
+4. **Photo:** save your photo as `assets/avatar.jpg` (a square crop, at least 256×256). Then swap the `DC` placeholder `<div>` for the `<img>` tag shown in the comment just above it.
 
 ## Deploy with GitHub Pages
 
