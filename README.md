@@ -27,3 +27,7 @@ These are placeholders in `index.html`:
 - `index.html`: all content
 - `styles.css`: layout and colors. Light and dark themes are set by the variables at the top.
 - `assets/favicon.svg`: the browser tab icon
+
+## Also in this repo
+
+- [`expense-tracker/`](expense-tracker/): **Saveit**, a mobile-first expense tracker that installs to your phone's home screen. See its [README](expense-tracker/README.md).

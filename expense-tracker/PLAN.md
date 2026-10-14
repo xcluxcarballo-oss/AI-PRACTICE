@@ -1,6 +1,6 @@
-# Pocket: Mobile Expense Tracker Plan
+# Saveit: Mobile Expense Tracker Plan
 
-> "Pocket" is a working name. Tell me if you want a different one.
+> **Status:** built. See [README.md](README.md) for how to run, install and deploy it.
 
 ## Goal
 
@@ -137,7 +137,7 @@ The aim is for the app to feel at home on both platforms. It takes the strongest
 Transaction {
   id: string,          // crypto.randomUUID()
   amount: number,      // integer cents, always positive
-  type: "expense",     // "income" later, if wanted
+  type: "expense",     // or "income"
   categoryId: string,
   date: "2026-10-14",  // local calendar date, so entries don't shift across time zones
   note: string,
@@ -145,14 +145,16 @@ Transaction {
   updatedAt: number
 }
 
-Category { id, name, emoji, color, order, archived }
+Category { id, type /* "expense" | "income" */, name, emoji, color, order, archived }
 
 Budget   { id, categoryId | null /* null = overall */, amount /* cents per month */ }
 
 Settings { currency, monthStartDay, theme, lastCategoryId, schemaVersion }
 ```
 
-Starter categories: 🍔 Food, 🛒 Groceries, 🚗 Transport, 🏠 Housing, 💡 Bills, 🎉 Fun, 🛍️ Shopping, 💊 Health, ✈️ Travel, 🎓 Education, ⋯ Other.
+Starter expense categories: 🍔 Food, 🛒 Groceries, 🚗 Transport, 🏠 Housing, 💡 Bills, 🎉 Fun, 🛍️ Shopping, 💊 Health, ✈️ Travel, 🎓 Education, 📦 Other.
+
+Starter income categories: 💼 Salary, 💻 Freelance, 🎁 Gifts, 📈 Investments, ↩️ Refunds, 💰 Other income.
 
 ## File layout
 
@@ -226,21 +228,20 @@ I'll commit after each step, so you can check progress on your phone as it goes.
 
 ## Later ideas (not in v1)
 
-- Income tracking and a net balance
 - Recurring expenses (rent, subscriptions) that add themselves each month
 - Multiple currencies, with conversion
 - Receipt photos
 - Sync across devices (would need an account and a backend, so it's deliberately left out of v1 to keep data private and the app free)
 - Native app via Expo, reusing the same data model and design
 
-## What I need from you before building
+## Decisions
 
-- **Name:** keep "Pocket" or pick another
-- **Currency:** your main one (EUR, CNY, HKD or another)
-- **Platform:** the PWA (recommended), or native apps with React Native/Expo
-- **Look:** one blended iOS/Android design (recommended), or a design that adapts per device (iOS styling on iPhone, Material styling on Android)
-- **Accent color:** any preference (for example blue, green or purple)
-- **Income:** track expenses only, or income too
-- **Categories:** keep the starter list or send your own
-
-If you'd like to start sooner, I'll build with the recommended defaults: Pocket, EUR, PWA, blended design, a green accent, and expenses only. You can change any of these later.
+| Question | Decision |
+|---|---|
+| Name | Saveit |
+| Currency | Euro (changeable in Settings) |
+| Platform | Installable web app (PWA) |
+| Look | One blended iOS/Android design |
+| Accent color | Emerald green (`#087a53` light, `#34d399` dark), chosen for "saving" and checked for WCAG AA contrast |
+| Income | Income and expenses, with a monthly balance |
+| Categories | The starter list above |
