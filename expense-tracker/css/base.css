@@ -1,0 +1,216 @@
+/* Reset, typography and the app frame (screens, headers, safe areas). */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--text-md);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* iOS zooms into inputs smaller than 16px, so every field is at least 16px. */
+input,
+select,
+textarea {
+  font-size: max(16px, 1em);
+}
+
+svg {
+  flex-shrink: 0;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- App frame ---------- */
+
+.app {
+  position: relative;
+  height: 100dvh;
+  max-width: var(--app-max);
+  margin: 0 auto;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* On tablets and desktop the app is a phone-width column. */
+@media (min-width: 520px) {
+  body {
+    background: var(--surface-2);
+  }
+
+  .app {
+    box-shadow: 0 0 0 1px var(--separator), 0 20px 60px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* Each tab is its own scroll container, so switching tabs keeps your place. */
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 var(--s4) calc(var(--tabbar-h) + var(--safe-bottom) + 96px);
+  animation: screen-in var(--dur) var(--ease);
+}
+
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Compact header: transparent at the top, frosted once the large title scrolls away. */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  margin: 0 calc(-1 * var(--s4));
+  padding: var(--safe-top) var(--s2) 0;
+  border-bottom: 0.5px solid transparent;
+  transition: background var(--dur-fast), border-color var(--dur-fast);
+}
+
+.topbar-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: var(--tap);
+}
+
+.topbar-title {
+  grid-column: 2;
+  font-weight: 600;
+  font-size: var(--text-lg);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity var(--dur-fast), transform var(--dur-fast);
+  white-space: nowrap;
+}
+
+.topbar-actions {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  gap: var(--s1);
+}
+
+.screen.is-scrolled .topbar {
+  background: var(--bar-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom-color: var(--separator);
+}
+
+.screen.is-scrolled .topbar-title {
+  opacity: 1;
+  transform: none;
+}
+
+.large-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  padding: var(--s1) 0 var(--s3);
+}
+
+.section-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin: var(--s6) var(--s1) var(--s2);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.section-title .link {
+  min-height: 0;
+  font-size: var(--text-md);
+  font-weight: 500;
+}
+
+.caption {
+  margin: var(--s2) var(--s4) 0;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.link {
+  color: var(--accent);
+  font-weight: 500;
+  text-decoration: none;
+  min-height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+}
